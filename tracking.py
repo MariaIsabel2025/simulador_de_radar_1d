@@ -18,8 +18,10 @@ class KF(object):
         self._accel_variance = accel_variance
 
         # covariance of state GRV
-        self._P = np.eye(NUMVARS)    #crea matriz identidad 2x2
-
+        #self._P = np.eye(NUMVARS)    #crea matriz identidad 2x2
+        ## FALTA: Parámetros de varianza: 5**2 ~ varianza posición inicial
+        ##                                (30*1.8*(1/3600))**2 ~ varianza de la velocidad inicial estimada 
+        self._P = np.array([[5**2,0],[0,(30*1.8*(1/3600))**2]])
     def predict(self, dt: float) -> None:
         # x = F x
         # P = F P Ft + G Gt a
@@ -105,6 +107,7 @@ class GestorDeTrayectos(object):
       estimador.predict(dt)
       xPredMedia = estimador.pos
       xPredDesvio = estimador.cov[iX,iX]**.5
+      print(xPredDesvio, desvDet)
       if xPredDesvio > tolPred * desvDet:
         activo[0] = False
         continue
