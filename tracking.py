@@ -8,6 +8,8 @@ NUMVARS = iV + 1     #número de variables en el sistema = 2
 class KF(object):
     def __init__(self, initial_x: float,   #doy un valor inicial para la posición
                        initial_v: float,   #doy un valor inicial para la velocidad
+                       initial_x_var: float, # ~ (resolución del radar)**2
+                       initial_v_var: float, # ~ (vel. máx del blanco)**2
                        accel_variance: float) -> None:
         # mean of state GRV
         self._x = np.zeros(NUMVARS)
@@ -21,7 +23,7 @@ class KF(object):
         #self._P = np.eye(NUMVARS)    #crea matriz identidad 2x2
         ## FALTA: Parámetros de varianza: 5**2 ~ varianza posición inicial
         ##                                (30*1.8*(1/3600))**2 ~ varianza de la velocidad inicial estimada 
-        self._P = np.array([[5**2,0],[0,(30*1.8*(1/3600))**2]])
+        self._P = np.array([[initial_x_var,0],[0,initial_v_var]])
     def predict(self, dt: float) -> None:
         # x = F x
         # P = F P Ft + G Gt a
@@ -81,10 +83,11 @@ class GestorDeTrayectos(object):
   def __init__(self):
     self._trayectos = []
     self._tiempo = 0
-  def actualizaTrayectos(self,detecciones,dt,varDet,varAcel,tol=1,tolPred=10):
+  def actualizaTrayectos(self,detecciones,dt,varDet,varVelInicial,varAcel,tol=1,tolPred=10):
     """ detecciones: lista de rangos de detecciones
         dt : paso de tiempo
         varDet : varianza del detector en su estimación de rango
+        varVelInicial : inicial de velocidad ~(vel. max blanco)**2
         varAcel : varianza de la aceleración del blanco (para nuevos trayectos)
         tol : tolerancia en desviaciones estandar
         tolPred : Si la predicción tiene un desvío estandar mayor que
@@ -107,7 +110,6 @@ class GestorDeTrayectos(object):
       estimador.predict(dt)
       xPredMedia = estimador.pos
       xPredDesvio = estimador.cov[iX,iX]**.5
-      print(xPredDesvio, desvDet)
       if xPredDesvio > tolPred * desvDet:
         activo[0] = False
         continue
@@ -121,7 +123,7 @@ class GestorDeTrayectos(object):
       usado[indices[seleccion][imin]]=True
       puntos.append(estimadoPosVel(estimador))
     for detLibre in detecciones[np.logical_not(usado)]:
-      estimador = KF(detLibre,0,varAcel)
+      estimador = KF(detLibre,0,varDet,varVelInicial,varAcel)
       self._trayectos.append((estimador,[estimadoPosVel(estimador)],[True]))
   def copiaTrayectos(self):
     return [np.array(puntos) for _,puntos,activo in self._trayectos if activo[0]]
