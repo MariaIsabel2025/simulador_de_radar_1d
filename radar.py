@@ -157,8 +157,8 @@ class Canal_radar(object):
     """
 
     ## Aserción de que el rango de objetivo solicitado pertenece al rango observable
-    assert rango_objetivo >= self.rango_minimo and rango_objetivo <= self.rango_maximo
-
+    if not (rango_objetivo >= self.rango_minimo and rango_objetivo <= self.rango_maximo):
+      return self
     ## Amplitud que debe tener el eco recibido de un blanco ubicado en rango mínimo
     amplitud_rango_minimo = self.amplitud_de_referencia_rango_minimo / self.muestras_por_pulso
 
@@ -260,8 +260,8 @@ class Simulador_escenario(object):
       resultados.append(self.canal.copia_vector_rx())
     return np.array(resultados)
   
-  def simula(self,escenario, tiempo_inicial, periodo_de_repeticion_de_pulso, pulsos_por_exploracion, numero_exploraciones,snr_rango_max=.5):
+  def simula(self,escenario, tiempo_inicial, periodo_de_repeticion_de_pulso,pulsos_por_exploracion, periodo_de_exploracion, numero_exploraciones,snr_rango_max=.5):
     """retorna lista de matrices doppler-rango para `numero_exploraciones` exploraciones"""
-    return [np.fft.fft(self.exploracion(escenario, tiempo_inicial + periodo_de_repeticion_de_pulso*pulsos_por_exploracion*nx, periodo_de_repeticion_de_pulso, pulsos_por_exploracion,snr_rango_max),axis=0)
+    return [np.fft.fft(self.exploracion(escenario, tiempo_inicial + periodo_de_exploracion*nx, periodo_de_repeticion_de_pulso, pulsos_por_exploracion,snr_rango_max),axis=0)
       for nx in range(numero_exploraciones)]
   
