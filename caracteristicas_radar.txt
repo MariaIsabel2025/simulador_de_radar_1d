@@ -1,0 +1,34 @@
+==============================================================================
+Radar
+==============================================================================
+-Tipo: Radar Sobre Horizonte por Onda de superficie
+-Modo de operacion: Pulsado-modulado(BPSK)
+-Condigo: Barker_11 [1,1,1,0,0,0,1,0,0,1,0]
+-Frec. muestreo: 60 kHz
+-Frec. portadora: 10 MHz
+-PRF: 150 Hz
+-Ancho de banda: 20 kHz
+-Num. Integraciones: 350
+==============================================================================
+
+
+==============================================================================
+Objetivos
+==============================================================================
+Se tiene 5 objetivos (Aeronaves y Embarcaciones)
+==============================================================================
+
+
+==============================================================================
+Matriz de datos 
+==============================================================================
+-Muestras de la señal recibida a la salida del receptor ( con un CAD  de 60 kHz). 
+-La señal se encuentra en Banda Base.
+-Muestras de tipo complejo.
+
+Los datos se encuentran en un .txt. 
+Dimension (k:1,n:367,m:350) k:Antena  n:muestra  m:pulso
+-Cada fila es una muestra
+-Cada columna es un pulso
+==============================================================================
+
