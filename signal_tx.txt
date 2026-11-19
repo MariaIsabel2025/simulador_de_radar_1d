@@ -1,0 +1,67 @@
+33 1
+2.0000+0.0000j 
+# New slice
+2.0000+0.0000j 
+# New slice
+2.0000+0.0000j 
+# New slice
+2.0000+0.0000j 
+# New slice
+2.0000+0.0000j 
+# New slice
+2.0000+0.0000j 
+# New slice
+2.0000+0.0000j 
+# New slice
+2.0000+0.0000j 
+# New slice
+2.0000+0.0000j 
+# New slice
+-2.0000+0.0000j 
+# New slice
+-2.0000+0.0000j 
+# New slice
+-2.0000+0.0000j 
+# New slice
+-2.0000+0.0000j 
+# New slice
+-2.0000+0.0000j 
+# New slice
+-2.0000+0.0000j 
+# New slice
+-2.0000+0.0000j 
+# New slice
+-2.0000+0.0000j 
+# New slice
+-2.0000+0.0000j 
+# New slice
+2.0000+0.0000j 
+# New slice
+2.0000+0.0000j 
+# New slice
+2.0000+0.0000j 
+# New slice
+-2.0000+0.0000j 
+# New slice
+-2.0000+0.0000j 
+# New slice
+-2.0000+0.0000j 
+# New slice
+-2.0000+0.0000j 
+# New slice
+-2.0000+0.0000j 
+# New slice
+-2.0000+0.0000j 
+# New slice
+2.0000+0.0000j 
+# New slice
+2.0000+0.0000j 
+# New slice
+2.0000+0.0000j 
+# New slice
+-2.0000+0.0000j 
+# New slice
+-2.0000+0.0000j 
+# New slice
+-2.0000+0.0000j 
+# New slice
